@@ -1,5 +1,5 @@
 
-module SistemaAviacaoRJ {
+module exercicio17 {
 	requires javafx.graphics;
 	requires javafx.controls;
 	requires javafx.fxml;

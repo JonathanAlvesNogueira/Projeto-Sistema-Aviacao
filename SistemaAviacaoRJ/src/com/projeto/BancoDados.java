@@ -31,7 +31,7 @@ public class BancoDados {
 	
 	public void salvar(Passageiro psg) {
 		
-		String sql = "INSERT INTO psgteste (titulopsg, descricaopsg, dataPublicacao) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO psgteste (nome, cpf, rg, cidade, cargo, dataPublicacao) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -53,7 +53,6 @@ public class BancoDados {
 		return pesquisarPorNome("");
 	}
 
-	@Override
 	public List<Passageiro> pesquisarPorNome(String titulo) {
 		
 		List<Passageiro> lista = new ArrayList<>();
@@ -65,10 +64,10 @@ public class BancoDados {
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) { 
-				Passageiro passageiro = new Passageiro();
-				passageiro.set(rs.getString("tituloPassageiro"));
-				passageiro.setDescricaoPassageiro(rs.getString("descricaoPassageiro"));
-				lista.add(passageiro);
+//				Passageiro passageiro = new Passageiro();
+//				passageiro.set(rs.getString("tituloPassageiro"));
+////				passageiro.setDescricaoPassageiro(rs.getString("descricaoPassageiro"));
+//				lista.add(passageiro);
 			}
 		} catch (Exception e){
 			e.printStackTrace();
@@ -82,4 +81,4 @@ public class BancoDados {
 	
 	
 	
-}
+
