@@ -9,7 +9,6 @@ public class Passageiro {
 	String cidade;
 	String cargo;
 	String RG;
-	private LocalDate dataPublicacao;
 	
 	
 	public Passageiro(String nome, String cpf, String cidade, String cargo, String rG) {
@@ -19,8 +18,8 @@ public class Passageiro {
 		this.cidade = cidade;
 		this.cargo = cargo;
 		this.RG = rG;
-		this.dataPublicacao = LocalDate.now();
-	
+		
+
 	}
 
 	
@@ -76,17 +75,6 @@ public class Passageiro {
 	public void setRG(String rG) {
 		RG = rG;
 	}
-
-
-	public LocalDate getDataPublicacao() {
-		return dataPublicacao;
-	}
-
-
-	public void setDataPublicacao(LocalDate dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
-	}
-
 
 	
 	

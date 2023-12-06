@@ -1,5 +1,7 @@
 package com.projeto;
 
+import java.sql.SQLException;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,13 +51,33 @@ public class PassageiroBoundary implements BoundaryRender{
             // Lógica para lidar com o botão Cadastrar
             System.out.println("Botão Cadastrar clicado!");
             BancoDados banco = new BancoDados();
+            
             String nome = nomeField.getText();
+            if(nome == "") {
+            	Label lblNome = new Label("Erro nome obrigatorio");
+            	grid.add(lblNome, 0, 6);
+            }
             String cpf = cpfField.getText();
+            if(cpf == "") {
+            	Label lblCpf = new Label("Erro cpf obrigatorio");
+            	grid.add(lblCpf, 0, 7);
+            }
             String rg = rgField.getText();
             String cargo = cargoField.getText();
             String cidade = cidadeField.getText();
             
+            
+            
             Passageiro psg = new Passageiro(nome,cpf, cidade, cargo, rg);
+            if(nome != "" && cpf != "") {
+            	  try {
+      				banco.salvar(psg);
+      			} catch (SQLException e1) {
+      				// TODO Auto-generated catch block
+      				e1.printStackTrace();
+      			}
+            }
+          
             
             
             
