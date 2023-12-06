@@ -1,14 +1,13 @@
 package com.projeto;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
+import javafx.scene.control.TextField;
 
 public class BancoDados {
 
@@ -23,7 +22,9 @@ public class BancoDados {
 			System.out.println("Banco Iniciado");
 //			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-			
+			Statement stmt2 = con.createStatement();
+//			CRIA TABELA SE NÃO EXISTIR
+			stmt2.execute("USE GESTAOAEROPORTO;");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,35 +68,47 @@ public class BancoDados {
 		
 	}
 
-	public List<Passageiro> lerTodos() {
-		return pesquisarPorNome("");
-	}
-
-	public List<Passageiro> pesquisarPorNome(String titulo) {
-		
-		List<Passageiro> lista = new ArrayList<>();
-		String sql = "SELECT * FROM psgteste WHERE titulopsg LIKE ?";
-		
-		try {
-			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, "%" + titulo + "%");
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()) { 
-//				Passageiro passageiro = new Passageiro();
-//				passageiro.set(rs.getString("tituloPassageiro"));
-////				passageiro.setDescricaoPassageiro(rs.getString("descricaoPassageiro"));
-//				lista.add(passageiro);
-			}
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-
-		return lista;
-	}
+//	public List<Passageiro> lerTodos() {
+//		return pesquisarPorNome("");
+//	}
 
 	
-	
+	public void preencherInformacoesPorCPF(TextField cpfField, TextField nomeField, TextField rgField, TextField cidadeField) {
+        String cpf = cpfField.getText();
+
+        // Substitua "SUA_QUERY_SQL" pela consulta SQL real que você precisa
+        String sql = "SELECT nome, rg, cidade FROM PASSAGEIRO WHERE CPF = ?";
+        
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Preencher os campos com as informações obtidas do banco de dados
+                String nome = rs.getString("nome");
+                String rg = rs.getString("rg");
+                String cidade = rs.getString("cidade");
+
+                // Verificar se os campos não estão vazios antes de definir os valores
+                if (!nome.isEmpty()) {
+                    nomeField.setText(nome);
+                }
+                if (!rg.isEmpty()) {
+                    rgField.setText(rg);
+                }
+                if (!cidade.isEmpty()) {
+                    cidadeField.setText(cidade);
+                }
+            } else {
+                // Lidar com o caso em que nenhum resultado é encontrado para o CPF
+                System.out.println("Nenhuma informação encontrada para o CPF: " + cpf);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Lidar com exceções SQL, se necessário
+        }
+    }
 	
 	
 	
