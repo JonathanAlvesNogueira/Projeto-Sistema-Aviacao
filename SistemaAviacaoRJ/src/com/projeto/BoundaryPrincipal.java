@@ -9,24 +9,37 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class BoundaryPrincipal extends Application{
+	//Declaração dos paineis
 	private BorderPane painelPrincipal = new BorderPane();
-	private BoundaryRender passageiroBoundary = new PassageiroBoundary(); 
+	private BoundaryRender passageiroBoundary = new PassageiroBoundary();
+	private BoundaryRender aeroportoBoundary = new AeroportoBoundary();
+	
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(@SuppressWarnings("exports") Stage stage) throws Exception {
+		//Criação dos Menus
 		MenuBar menuPrincipal = new MenuBar();
 		Menu menuGestao = new Menu("Gestão");
 		MenuItem menuItemPassageiros = new MenuItem("Passageiros");
+		MenuItem menuItemAeroporto = new MenuItem("Aeroporto");
+		
+		//Ligação dos menus
 		menuPrincipal.getMenus().addAll(menuGestao);
 		menuGestao.getItems().add(menuItemPassageiros);
+		menuGestao.getItems().add(menuItemAeroporto);
 		
+		//Ativação dos botões
 		menuItemPassageiros.setOnAction( e -> {
 						painelPrincipal.setCenter(passageiroBoundary.render());
-						System.out.println("Abrir Tela Passageiro");
 						});
+		menuItemAeroporto.setOnAction( e -> {
+			painelPrincipal.setCenter(aeroportoBoundary.render());
+			});
 		
+		//Implantação do menu principal e a tela e inicio
 		painelPrincipal.setTop(menuPrincipal);
 		painelPrincipal.setCenter(new Label("** Bem-vindo ao Sistema de Aviação RJ!! **"));
-		
+	
+		//Definição da cena
 		Scene cena = new Scene(painelPrincipal, 800, 600);
 		stage.setScene(cena);
 		stage.setTitle("Sistema de Aviação RJ");
