@@ -1,4 +1,6 @@
 package com.projeto;
+import com.projeto.passageiro.PassageiroBoundary;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ public class BoundaryPrincipal extends Application{
 	private BorderPane painelPrincipal = new BorderPane();
 	private BoundaryRender passageiroBoundary = new PassageiroBoundary();
 	private BoundaryRender aeroportoBoundary = new AeroportoBoundary();
+	private BoundaryRender aeronaveBoundary = new AeronaveBoundary();
 	
 	@Override
 	public void start(@SuppressWarnings("exports") Stage stage) throws Exception {
@@ -21,11 +24,13 @@ public class BoundaryPrincipal extends Application{
 		Menu menuGestao = new Menu("Gestão");
 		MenuItem menuItemPassageiros = new MenuItem("Passageiros");
 		MenuItem menuItemAeroporto = new MenuItem("Aeroporto");
+		MenuItem menuItemAeronave = new MenuItem("Aeronave");
 		
 		//Ligação dos menus
 		menuPrincipal.getMenus().addAll(menuGestao);
 		menuGestao.getItems().add(menuItemPassageiros);
 		menuGestao.getItems().add(menuItemAeroporto);
+		menuGestao.getItems().add(menuItemAeronave);
 		
 		//Ativação dos botões
 		menuItemPassageiros.setOnAction( e -> {
@@ -34,6 +39,10 @@ public class BoundaryPrincipal extends Application{
 		menuItemAeroporto.setOnAction( e -> {
 			painelPrincipal.setCenter(aeroportoBoundary.render());
 			});
+		
+		menuItemAeronave.setOnAction(e -> {
+			painelPrincipal.setCenter(aeronaveBoundary.render());
+		});
 		
 		//Implantação do menu principal e a tela e inicio
 		painelPrincipal.setTop(menuPrincipal);

@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.projeto.passageiro.Passageiro;
 
 import javafx.scene.control.TextField;
 
@@ -109,8 +113,6 @@ public class BancoDados {
             // Lidar com exceções SQL, se necessário
         }
     }
-	
-	
 	
 	
 	

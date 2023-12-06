@@ -1,4 +1,4 @@
-package com.projeto;
+package com.projeto.passageiro;
 
 import java.time.LocalDate;
 
