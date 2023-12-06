@@ -5,31 +5,46 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.projeto.*;
-
-
 
 public class BancoDados {
 
 
-	public static final String JDBC_URL= "jdbc:mariadb://localhost:3306/psg";
+	public static final String JDBC_URL= "jdbc:mariadb://localhost:3307";
 	public static final String JDBC_USER="root";
+	public static final String JDBC_PASS="alunofatec";
 	private Connection con;
 	
 	public BancoDados() {
 		try {
-			
-			Class.forName("org.mariadb.jdbc.Driver");
-			con = DriverManager.getConnection(JDBC_URL, JDBC_USER, null);
+			System.out.println("Banco Iniciado");
+			Class.forName("org.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void salvar(Passageiro psg) {
+	public void salvar(Passageiro psg) throws SQLException {
+		
+		Statement stmt2 = con.createStatement();
+//		CRIA TABELA SE NÃO EXISTIR
+		
+		
+	    String tabela = "CREATE TABLE IF NOT EXISTS PASSAGEIRO("
+	    		+ "ID_PASSAGEIRO INT AUTO_INCREMENT PRIMARY KEY"
+	    		+ "NOME VARCHAR(50) NOT NULL"
+	    		+ "CPF CHAR(11) NOT NULL)"
+	    		+ "RG CHAR(9)"
+	    		+ "CIDADE VARCHAR(20)"
+	    		+ "CARGO VARCHAR(50)";
+		
+	    stmt2.execute(tabela);
+		System.out.println("Criando tabela Passageiro");
 		
 		String sql = "INSERT INTO psgteste (nome, cpf, rg, cidade, cargo, dataPublicacao) VALUES (?, ?, ?, ?, ?, ?)";
 		
@@ -76,6 +91,20 @@ public class BancoDados {
 		return lista;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 	
 	
