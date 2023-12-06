@@ -1,6 +1,7 @@
 package com.projeto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
@@ -20,7 +21,7 @@ public class AeroportoControl {
 	private LongProperty portoes = new SimpleLongProperty(0);
 	
 	private ObservableList<Aeroporto> lista = FXCollections.observableArrayList();
-	
+	private AeroportoDAO aeroportoDAO = new AeroportoDAOImpl();
 	
 	@SuppressWarnings("exports")
 	public LongProperty idProperty() {
@@ -54,5 +55,29 @@ public class AeroportoControl {
 	public ObservableList<Aeroporto> getLista() {
 		return lista;
 	}
-
+	
+	public void cadastrar() {
+		Aeroporto a = new Aeroporto();
+		a.setId(id.get());
+		a.setNome(nome.get());
+		a.setCidade(cidade.get());
+		a.setSigla(sigla.get());
+		a.setInauguracao(inauguracao.get());
+		a.setPortoes(portoes.get());
+		aeroportoDAO.cadastrar(a);
+		consultarTodos();		
+	}
+	
+	public void consultarTodos() {
+		List<Aeroporto> aeroportos = aeroportoDAO.consultarTodos();
+		lista.clear();
+		lista.addAll(aeroportos);
+	}
+	
+	public void consultar() {
+		List<Aeroporto> aeroportos = aeroportoDAO.consultarNome(nome.get());
+		lista.clear();
+		lista.addAll(aeroportos);
+	}
+	
 }

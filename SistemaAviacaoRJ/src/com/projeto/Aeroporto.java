@@ -13,7 +13,7 @@ public class Aeroporto {
 	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -43,7 +43,7 @@ public class Aeroporto {
 	public long getPortoes() {
 		return portoes;
 	}
-	public void setPortoes(int portoes) {
+	public void setPortoes(long portoes) {
 		this.portoes = portoes;
 	}
 	

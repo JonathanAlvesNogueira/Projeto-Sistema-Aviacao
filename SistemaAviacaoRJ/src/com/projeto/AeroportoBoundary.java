@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.LocalDateStringConverter;
@@ -75,6 +76,7 @@ public class AeroportoBoundary implements BoundaryRender {
 	@SuppressWarnings("exports")
 	@Override
 	public Pane render() {
+		BorderPane border = new BorderPane();
 		GridPane grid = new GridPane();
 	    grid.setPadding(new Insets(20, 20, 20, 20));
 	    grid.setVgap(10);
@@ -101,17 +103,16 @@ public class AeroportoBoundary implements BoundaryRender {
         grid.add(btnCadastrar, 0, 6);
         grid.add(btnConsultar, 1, 6);
 
-        btnCadastrar.setOnAction(e -> {
-            System.out.println("Botão Cadastrar clicado!");
-        });
-        btnConsultar.setOnAction(e -> {
-            System.out.println("Botão Consultar clicado!");
-        });
+        btnCadastrar.setOnAction(e -> control.cadastrar());
+        btnConsultar.setOnAction(e -> control.consultar());
         
         generateBindings();
         generateTable();
         
-        return grid;
+        border.setTop(grid);
+        border.setCenter(table);
+        
+        return border;
 	}
 
 }
