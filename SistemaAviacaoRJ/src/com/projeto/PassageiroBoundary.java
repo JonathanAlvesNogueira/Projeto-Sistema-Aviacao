@@ -48,6 +48,20 @@ public class PassageiroBoundary implements BoundaryRender{
         cadastrarButton.setOnAction(e -> {
             // Lógica para lidar com o botão Cadastrar
             System.out.println("Botão Cadastrar clicado!");
+            BancoDados banco = new BancoDados();
+            String nome = nomeField.getText();
+            String cpf = cpfField.getText();
+            String rg = rgField.getText();
+            String cargo = cargoField.getText();
+            String cidade = cidadeField.getText();
+            
+            Passageiro psg = new Passageiro(nome,cpf, cidade, cargo, rg);
+            
+            
+            
+            
+            
+            
         });
 
         // Configurando a ação do botão Consultar
