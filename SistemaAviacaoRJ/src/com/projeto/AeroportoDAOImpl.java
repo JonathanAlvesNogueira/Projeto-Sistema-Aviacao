@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AeroportoDAOImpl implements AeroportoDAO{
 
-	private static final String JDBC_URL =  "jdbc:mariadb://localhost:3306/aviacao?characterEncoding=latin1";
+	private static final String JDBC_URL =  "jdbc:mariadb://localhost:3306/aviacao";
 	private static final String JDBC_USER = "root";
 	private static final String JDBC_PASS = "";
 	private Connection con;

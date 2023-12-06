@@ -1,4 +1,6 @@
 
+
+
 module exercicio17 {
 	requires javafx.graphics;
 	requires javafx.controls;
@@ -6,6 +8,5 @@ module exercicio17 {
 	requires java.sql;
 	requires javafx.base;
 	exports com.projeto;
-	
 	
 }
