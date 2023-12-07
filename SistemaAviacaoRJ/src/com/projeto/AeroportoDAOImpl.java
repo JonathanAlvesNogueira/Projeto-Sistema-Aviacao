@@ -30,7 +30,7 @@ public class AeroportoDAOImpl implements AeroportoDAO{
 	
 	@Override
 	public void cadastrar(Aeroporto a) {
-		String sql = "INSERT INTO alunos "
+		String sql = "INSERT INTO aeroporto "
 				+ "(id, nome, cidade, sigla, inauguracao, portoes) VALUES "
 				+ "(?, ?, ?, ?, ?, ?)";
 			try {
@@ -40,6 +40,7 @@ public class AeroportoDAOImpl implements AeroportoDAO{
 				stmt.setString(3, a.getCidade());
 				stmt.setString(4, a.getSigla());
 				stmt.setDate(5, java.sql.Date.valueOf(a.getInauguracao()));
+				stmt.setLong(6, a.getId());
 				stmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -54,7 +55,7 @@ public class AeroportoDAOImpl implements AeroportoDAO{
 	@Override
 	public List<Aeroporto> consultarNome(String nome) {
 		List<Aeroporto> lista = new ArrayList<>();
-		String sql = "SELECT * FROM alunos WHERE nome LIKE ?";
+		String sql = "SELECT * FROM aeroporto WHERE nome LIKE ?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, "%" + nome + "%");
