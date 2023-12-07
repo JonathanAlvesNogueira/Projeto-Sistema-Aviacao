@@ -3,6 +3,7 @@ import com.projeto.aeronave.AeronaveBoundary;
 import com.projeto.passageiro.PassageiroBoundary;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -17,37 +18,52 @@ public class BoundaryPrincipal extends Application{
 	private BoundaryRender passageiroBoundary = new PassageiroBoundary();
 	private BoundaryRender aeroportoBoundary = new AeroportoBoundary();
 	private BoundaryRender aeronaveBoundary = new AeronaveBoundary();
+	private BoundaryRender pilotoBoundary = new PilotoBoundary();
 	
 	@Override
 	public void start(@SuppressWarnings("exports") Stage stage) throws Exception {
+		
 		//Criação dos Menus
 		MenuBar menuPrincipal = new MenuBar();
-		Menu menuGestao = new Menu("Gestão");
-		MenuItem menuItemPassageiros = new MenuItem("Passageiros");
-		MenuItem menuItemAeroporto = new MenuItem("Aeroporto");
-		MenuItem menuItemAeronave = new MenuItem("Aeronave");
+		Menu menu = new Menu("Menu");
+		MenuItem menuItemPassageiros = new MenuItem("Gestão de Passageiros");
+		MenuItem menuItemAeroporto = new MenuItem("Gestão de Aeroportos");
+		MenuItem menuItemAeronave = new MenuItem("Gestão de Aeronaves");
+		MenuItem menuItemPiloto = new MenuItem("Gestão de Pilotos");
+		MenuItem menuItemSair = new MenuItem("Sair");
 		
-		//Ligação dos menus
-		menuPrincipal.getMenus().addAll(menuGestao);
-		menuGestao.getItems().add(menuItemPassageiros);
-		menuGestao.getItems().add(menuItemAeroporto);
-		menuGestao.getItems().add(menuItemAeronave);
+		//Ativação dos menus
+		menuPrincipal.getMenus().addAll(menu);
+		menu.getItems().add(menuItemPassageiros);
+		menu.getItems().add(menuItemAeroporto);
+		menu.getItems().add(menuItemAeronave);
+		menu.getItems().add(menuItemPiloto);
+		menu.getItems().add(menuItemSair);
 		
-		//Ativação dos botões
+		//Ativação dos botões de seleção de sistema
 		menuItemPassageiros.setOnAction( e -> {
-						painelPrincipal.setCenter(passageiroBoundary.render());
-						});
+			painelPrincipal.setCenter(passageiroBoundary.render());
+		});
 		menuItemAeroporto.setOnAction( e -> {
 			painelPrincipal.setCenter(aeroportoBoundary.render());
-			});
+		});
 		
 		menuItemAeronave.setOnAction(e -> {
 			painelPrincipal.setCenter(aeronaveBoundary.render());
 		});
+		menuItemPiloto.setOnAction(e -> {
+			painelPrincipal.setCenter(pilotoBoundary.render());
+		});
+		
+		menuItemSair.setOnAction(e-> {
+			Platform.exit();
+			System.exit(0);
+		});
 		
 		//Implantação do menu principal e a tela e inicio
 		painelPrincipal.setTop(menuPrincipal);
-		painelPrincipal.setCenter(new Label("** Bem-vindo ao Sistema de Aviação RJ!! **"));
+		painelPrincipal.setCenter(new Label("** BEM-VINDO AO SISTEMA DE AVIAÇÃO RJ!! ** \n"
+				                          + "            Selecione uma opção em MENU.  "));
 	
 		//Definição da cena
 		Scene cena = new Scene(painelPrincipal, 800, 600);

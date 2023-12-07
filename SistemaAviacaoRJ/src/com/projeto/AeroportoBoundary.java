@@ -27,7 +27,7 @@ public class AeroportoBoundary implements BoundaryRender {
 	private TextField txtPortoes = new TextField();
 	
 	Button btnCadastrar = new Button("Cadastrar");
-    Button btnConsultar = new Button("Consultar");
+    Button btnConsultar = new Button("Consultar por Nome");
     
     private AeroportoControl control = new AeroportoControl();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -81,27 +81,29 @@ public class AeroportoBoundary implements BoundaryRender {
 	    grid.setPadding(new Insets(20, 20, 20, 20));
 	    grid.setVgap(10);
 	    grid.setHgap(10);
+	    
+	    grid.add(new Label("GESTÃO DE AEROPORTOS"), 0, 0);
         
-        grid.add(new Label("Id:"), 0, 0);
-        grid.add(txtId, 1, 0);
+        grid.add(new Label("Id do Aeroporto:"), 0, 1);
+        grid.add(txtId, 1, 1);
         
-        grid.add(new Label("Nome:"), 0, 1);
-        grid.add(txtNome, 1, 1);
+        grid.add(new Label("Nome do Aeroporto:"), 0, 2);
+        grid.add(txtNome, 1, 2);
         
-        grid.add(new Label("Cidade:"), 0, 2);
-        grid.add(txtCidade, 1, 2);
+        grid.add(new Label("Cidade:"), 0, 3);
+        grid.add(txtCidade, 1, 3);
 
-        grid.add(new Label("Sigla:"), 0, 3);
-        grid.add(txtSigla, 1, 3);
+        grid.add(new Label("Sigla:"), 0, 4);
+        grid.add(txtSigla, 1, 4);
 
-        grid.add(new Label("Inauguração:"), 0, 4);
-        grid.add(txtInauguracao, 1, 4);
+        grid.add(new Label("Inauguração:"), 0, 5);
+        grid.add(txtInauguracao, 1, 5);
 
-        grid.add(new Label("Numero de Portões:"), 0, 5);
-        grid.add(txtPortoes, 1, 5);
+        grid.add(new Label("Numero de Portões:"), 0, 6);
+        grid.add(txtPortoes, 1, 6);
 
-        grid.add(btnCadastrar, 0, 6);
-        grid.add(btnConsultar, 1, 6);
+        grid.add(btnCadastrar, 0, 7);
+        grid.add(btnConsultar, 1, 7);
 
         btnCadastrar.setOnAction(e -> control.cadastrar());
         btnConsultar.setOnAction(e -> control.consultar());
