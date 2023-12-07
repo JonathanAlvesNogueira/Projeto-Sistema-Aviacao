@@ -1,4 +1,5 @@
 package com.projeto;
+import com.projeto.aeronave.AeronaveBoundary;
 import com.projeto.passageiro.PassageiroBoundary;
 
 import javafx.application.Application;
