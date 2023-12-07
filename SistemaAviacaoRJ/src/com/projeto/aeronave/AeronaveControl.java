@@ -1,5 +1,6 @@
 package com.projeto.aeronave;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.projeto.passageiro.Passageiro;
@@ -87,7 +88,7 @@ public class AeronaveControl {
 		}
 		
 		
-		public void salvar() {
+		public void salvar() throws SQLException {
 			Aeronave a = new Aeronave();
 			a.setModelo(modelo.get());
 			a.setNumeroSerie(numeroSerie.get());

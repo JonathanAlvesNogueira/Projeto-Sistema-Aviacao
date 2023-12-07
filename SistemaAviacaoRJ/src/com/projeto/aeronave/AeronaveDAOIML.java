@@ -5,25 +5,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.projeto.Aeroporto;
 
 public class AeronaveDAOIML implements AeronaveDAO{
 
 	
-	private static final String JDBC_URL =  "jdbc:mariadb://localhost:3306/aviacao";
+	private static final String JDBC_URL =  "jdbc:mysql://localhost:3306";
 	private static final String JDBC_USER = "root";
-	private static final String JDBC_PASS = "";
+	private static final String JDBC_PASS = "954150691Joth";
 	private Connection con;
 	
 	public AeronaveDAOIML() { 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
+//			Class.forName("org.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -32,9 +29,30 @@ public class AeronaveDAOIML implements AeronaveDAO{
 	
 	
 	@Override
-	public void salvar(Aeronave a) {
-		String sql = "INSERT INTO AERONAVES "
-				+ "(modelo, numeroserie, anofabricacao) VALUES "
+	public void salvar(Aeronave a) throws SQLException {
+		
+		  Statement stmtCriacao = con.createStatement();
+		  String criacaoBD = "CREATE DATABASE IF NOT EXISTS GESTAOAEROPORTO";
+		  stmtCriacao.execute(criacaoBD);
+		  String use = "USE GESTAOAEROPORTO";
+		  stmtCriacao.execute(use);
+		  
+		  String createTableSQL = "CREATE TABLE IF NOT EXISTS AERONAVE ("
+                  + "id INT AUTO_INCREMENT PRIMARY KEY,"
+                  + "modelo VARCHAR(50),"
+                  + "numero_serie VARCHAR(255),"
+                  + "ano_fabricacao INT"
+                  + ");";
+		  
+          stmtCriacao.executeUpdate(createTableSQL);
+          
+          
+          System.out.println("Tabela 'aeronave' criada com sucesso!");
+		
+		
+		
+		String sql = "INSERT INTO AERONAVE "
+				+ "(modelo, numero_serie, ano_fabricacao) VALUES "
 				+ "(?, ?, ?);";
 			try {
 				PreparedStatement stmt = con.prepareStatement(sql);
@@ -55,16 +73,16 @@ public class AeronaveDAOIML implements AeronaveDAO{
 	@Override
 	public List<Aeronave> pesquisarModelo(String nome) {
 		List<Aeronave> lista = new ArrayList<>();
-		String sql = "SELECT * FROM alunos WHERE nome LIKE ?";
+		String sql = "SELECT * FROM AERONAVE WHERE modelo LIKE ?";
 		try {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, "%" + nome + "%");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) { 
 				Aeronave a = new Aeronave();
-				a.setAnoFabricao(rs.getLong("anofabricacao"));
+				a.setAnoFabricao(rs.getLong("ano_fabricacao"));
 				a.setModelo( rs.getString("modelo") );
-				a.setNumeroSerie(sql);
+				a.setNumeroSerie(rs.getString("numero_serie"));
 				lista.add(a);
 			}
 		} catch (SQLException e) {

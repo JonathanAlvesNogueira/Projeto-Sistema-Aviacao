@@ -1,5 +1,7 @@
 package com.projeto.aeronave;
 
+import java.sql.SQLException;
+
 import com.projeto.Aeroporto;
 import com.projeto.BoundaryRender;
 import com.projeto.passageiro.Passageiro;
@@ -74,15 +76,15 @@ public class AeronaveBoundary implements BoundaryRender{
         grid.setHgap(10);
 
         // Adicionando componentes à grade
-        grid.add(new Label("Nome:"), 0, 0);
+        grid.add(new Label("Numero Série:"), 0, 0);
         numeroSerie = new TextField();
         grid.add(numeroSerie, 1, 0);
 
-        grid.add(new Label("CPF:"), 0, 1);
+        grid.add(new Label("Modelo :"), 0, 1);
         modelo = new TextField();
         grid.add(modelo, 1, 1);
 
-        grid.add(new Label("RG:"), 0, 2);
+        grid.add(new Label("Ano Fabricação:"), 0, 2);
         anoFabricacao = new TextField();
         grid.add(anoFabricacao, 1, 2);
 
@@ -93,7 +95,12 @@ public class AeronaveBoundary implements BoundaryRender{
 
         // Configurando a ação do botão Cadastrar
         cadastrarButton.setOnAction(e -> {
-        		control.salvar();
+        		try {
+					control.salvar();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         });
         
 
