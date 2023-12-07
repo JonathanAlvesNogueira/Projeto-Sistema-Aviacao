@@ -40,7 +40,7 @@ public class AeroportoDAOImpl implements AeroportoDAO{
 				stmt.setString(3, a.getCidade());
 				stmt.setString(4, a.getSigla());
 				stmt.setDate(5, java.sql.Date.valueOf(a.getInauguracao()));
-				stmt.setLong(6, a.getId());
+				stmt.setLong(6, a.getPortoes());
 				stmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
