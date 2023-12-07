@@ -12,7 +12,7 @@ public class PassageiroDAOIML implements PassageiroDAO {
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/GESTAOAEROPORTO";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "954150691Joth";
+    private static final String JDBC_PASS = "alunofatec";
     private Connection con;
 
     public PassageiroDAOIML() {
