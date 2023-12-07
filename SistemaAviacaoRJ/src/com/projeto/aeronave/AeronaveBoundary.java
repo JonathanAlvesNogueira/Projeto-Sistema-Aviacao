@@ -107,6 +107,7 @@ public class AeronaveBoundary implements BoundaryRender{
         // Configurando a ação do botão Consultar
         consultarButton.setOnAction(e -> {
         	control.ler();
+        	System.out.println("Consultar clicado");
         	
         	
         

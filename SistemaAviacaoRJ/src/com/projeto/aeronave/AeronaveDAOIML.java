@@ -12,7 +12,7 @@ import java.util.List;
 public class AeronaveDAOIML implements AeronaveDAO{
 
 	
-	private static final String JDBC_URL =  "jdbc:mysql://localhost:3306";
+	private static final String JDBC_URL =  "jdbc:mysql://localhost:3306/GESTAOAEROPORTO";
 	private static final String JDBC_USER = "root";
 	private static final String JDBC_PASS = "954150691Joth";
 	private Connection con;
