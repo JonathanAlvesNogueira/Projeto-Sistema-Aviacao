@@ -65,7 +65,7 @@ public class AeroportoDAOImpl implements AeroportoDAO{
 				a.setId( rs.getLong("id") );
 				a.setNome( rs.getString("nome") );
 				a.setCidade( rs.getString("cidade") );
-				a.setCidade( rs.getString("sigla") );
+				a.setSigla( rs.getString("sigla") );
 				a.setInauguracao( rs.getDate("inauguracao").toLocalDate() );
 				a.setPortoes( rs.getLong("portoes") );
 				lista.add(a);
